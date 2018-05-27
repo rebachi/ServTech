@@ -1,0 +1,76 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	controllerName="com.publix.servtech.controller.Parts" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Add/View Parts" navButtonPress="onNavBack" showNavButton="true">
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="pCancel" text="Cancel" type="Reject" press="onNavBack"/>
+						<Button id="paction" text="Save" type="Accept" press="handlePartsAdd"/>
+					</Toolbar>
+				</footer>
+				<content>
+					<VBox>
+						<Table id="allParts2">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="Parts" level="H2"/>
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column >
+									<Text text="Part No"/>
+								</Column>
+								<Column demandPopin="true" hAlign="End">
+									<Text text="Qty"/>
+								</Column>
+								<Column demandPopin="true">
+									<Text text="Description"/>
+								</Column>
+							</columns>
+						</Table>
+						<VBox class="sapUiSmallMargin">
+							<f:Form id="FormChange471" editable="true">
+								<f:title>
+									<core:Title text="Add a Part"/>
+								</f:title>
+								<f:layout>
+									<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1"
+										emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+								</f:layout>
+								<f:formContainers>
+									<f:FormContainer>
+										<f:formElements>
+											<f:FormElement label="Part #">
+												<f:fields>
+													<Input value="{SupplierName}" id="name"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Quantity">
+												<f:fields>
+													<Input value="{HouseNumber}">
+														<layoutData>
+															<l:GridData span="XL1 L2 M2 S4"/>
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Description">
+												<f:fields>
+													<TextArea  value="{City}" growing="true" growingMaxLines="5"/>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+								</f:formContainers>
+							</f:Form>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

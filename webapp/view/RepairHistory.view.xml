@@ -1,0 +1,56 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.publix.servtech.controller.RepairHistory"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Repair History" navButtonPress="onNavBack" showNavButton="true">
+				<content>
+					<Table id="EquipementHistory" width="auto" items="{ path: 'equipment>/EquipmentDisplayHeaderSet'}" 
+									noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+							<headerToolbar>
+								<Toolbar id="operalineItemsToolbar1">
+									<Title id="operalineItemsHeader1" text="Repair History - {repairHistoryView>/equipID}"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="Service Order #"/>
+								</Column>
+								<Column>
+									<Text text="Equipment"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+									<Text text="MaterialNumber"/>
+								</Column>
+								<Column>
+									<Text text="SerialNumber"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+									<Text text="MaterialDoc"/>
+								</Column>
+								<Column>
+									<Text text="PostingDate"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+									<Text text="MovementType"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectIdentifier text="{equipment>ServiceOrderNumber}"/>
+										<ObjectIdentifier text="{equipment>Equipment}"/>
+										<ObjectIdentifier text="{equipment>MaterialNumber}"/>
+										<ObjectIdentifier text="{equipment>SerialNumber}"/>
+										<ObjectIdentifier text="{equipment>MaterialDoc}"/>
+										<ObjectIdentifier text="{equipment>PostingDate}"/>
+										<ObjectIdentifier text="{equipment>MovementType}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

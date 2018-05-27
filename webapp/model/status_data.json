@@ -1,0 +1,10 @@
+{
+	"statuses":[
+		{"value":"Acknowledged", "key":"E0022"},
+		{"value":"Waiting on estimate", "key":"E0007"},
+		{"value":"Waiting for Parts", "key":"E0010"},
+		{"value":"Service Completed", "key":"E0021"}
+	],
+	"editable": true,
+	"tooltip": "WO Status"  
+}

@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{ProductId}" class="sapUiPopupWithPadding" placement="Right" initialFocus="action">
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="pCancel" text="Cancel" type="Reject" press="handlePartsCancel"/>
+				<Button id="paction" text="Save" type="Accept" press="handlePartsAdd"/>
+			</Toolbar>
+		</footer>
+		<VBox>
+			<Label text="Added Parts"/>
+			<Table id="allParts2">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="Parts" level="H2"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column >
+						<Text text="Part No"/>
+					</Column>
+					<Column demandPopin="true">
+						<Text text="Description"/>
+					</Column>
+					<Column demandPopin="true" hAlign="End">
+						<Text text="Qty"/>
+					</Column>
+					<Column demandPopin="true" hAlign="Center">
+						<Text text="Weight"/>
+					</Column>
+				</columns>
+			</Table>
+			<Label text="Add a Part:"/>
+			<Label text="Part #"/>
+			<Input id="partName"></Input>
+			<Label text="Qty:"/>
+			<Input id="partQty"></Input>
+			<Label text="Desc"/>
+			<Input id="partDesc"></Input>      
+			
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>

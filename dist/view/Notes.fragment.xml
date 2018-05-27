@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="Not USED  {ProductId}" class="sapUiPopupWithPadding" placement="Right" initialFocus="action">
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="nCancel" text="Cancel" type="Reject" press="handleNotesCancel"/>
+				<Button id="naction" text="Save" type="Accept" press="handleNotesSave"/>
+			</Toolbar>
+		</footer>
+		<VBox>
+			
+			<Label text="Existing Notes"/>
+			<TextArea id="allNotes" width="100%" value="more moremoremoremoremoremoremoremore more moremore   moremore moremore moremore" rows="3" growing="true" growingMaxLines="5"
+				editable="false" enabled="true"/>
+			<Label text="Add a Note:"/>
+			<TextArea id="addaNote" width="100%" value="{detailView>/existingNotes}" rows="3" growing="true" growingMaxLines="5"
+				editable="true" enabled="true"/>
+			<!--<Button text="Save" press="saveNote"/>-->
+				
+		</VBox>
+			
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="barcodeDialog"
+		title="Barcode Scanner" type="Message" afterClose="destroyMe">
+		<content>
+			<VBox>
+			<Label design="Bold" id="message" text="Barcode Scanner is not available. "/>
+			<Button text="Try Again" class="sapUiSmallMarginTop" icon="sap-icon://bar-code" press="reScan"/>
+			<Label design="Bold" id="message2" text="Or" class="sapUiSmallMarginTop" />
+			<Input type="Number" value="" id="barcodeManual" width="90%" liveChange="enableSubmitDlg" class="sapUiSmallMarginTop" placeholder="Enter Manually"/>
+			<!--<MaskInput value=""  placeholderSymbol=" " mask="999999999"/>-->
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Submit" enabled="false" press="barcodeManualSubmit"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" enabled="true" press="oDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

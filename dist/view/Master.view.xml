@@ -1,0 +1,85 @@
+<mvc:View controllerName="com.publix.servtech.controller.Master" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:semantic="sap.m.semantic" xmlns:publix="com.publix.servtech.control">
+	<semantic:MasterPage id="page" navButtonPress="goToStoreSel" showNavButton="true" title="{masterView>/title}">
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<SearchField id="searchField" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" width="100%"
+						search="onSearch"></SearchField>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+		<semantic:content>
+			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
+			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+			<!-- path: '/SO_header1Set?$filter=ServiceTech%20eq%20%27494351%27', -->
+			<!--<Text class="sapUiSmallMargin sapUiNoMarginBottom" tex+"></Text>-->
+			<!--<Text binding="{/StoreAddressSet('{= ${masterView>/storeID} }')}" text="{ShoppngCntrNm}"></Text>-->
+			<!--<Text binding="{ path: 'masterView>/storeID', formatter: '.formatter.addressLink' } " text="{City}"></Text>-->
+			<!--<Label class="sapUiSmallMargin sapUiNoMarginBottom" binding="{/StoreAddressSet('123')}" text="{masterView>/storeID} {ShoppngCntrNm}" design="Bold"/>-->
+			<!--<Label class="sapUiSmallMargin sapUiNoMarginTop" binding="{/StoreAddressSet('123')}"-->
+			<!--	text=" {StreetAddress} {City}, {State}, {ZipCode}" design="Bold"/>-->
+			
+			<Label class="sapUiSmallMargin sapUiNoMarginBottom"  text="{appView>/storeID} {appView>/ShoppngCntrNm}" design="Bold"/>
+			<Label class="sapUiSmallMargin sapUiNoMarginTop" text=" {appView>/StreetAddress} {appView>/City}, {appView>/State}, {appView>/ZipCode}" design="Bold"/>
+			
+			<List id="list"
+				items="{ path: '/SO_header1Set', sorter: { path: 'Number', descending: true }, filters : [ { path : 'ServiceTech', operator : 'EQ', value1 : '1217027'} ], groupHeaderFactory: '.createGroupHeader' }"
+				busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true"
+				updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+				<infoToolbar>
+					<Toolbar active="true" id="OfflineBar" visible="{appView>/offLineMode}" press="onOpenOfflineInfo">
+						<Title id="OfflineBarLabel" text="&#9432; Offline Mode "/>
+					</Toolbar>
+				</infoToolbar>
+				<items>
+					<publix:ServTechListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange" title="{Number}"
+						number="{ path:'FinishDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MM/dd/yy', source : {pattern: 'yyyyMMdd'} } }">
+						<publix:firstStatus>
+							<!--<ObjectStatus-->
+							<!--	text="{path : 'FinishTime/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm:ss a'}}"/>-->
+							<ObjectStatus text="{ path:'FinishTime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern : 'HH:mm:ss a' } }"/>
+						</publix:firstStatus>
+						<publix:secondStatus>
+							<ObjectStatus text="{ path: 'Priority', formatter: '.formatter.priorityText' }"
+								state="{ path: 'Priority', formatter: '.formatter.priorityStatus' }"/>
+							<!--<ObjectStatus text="{ path:'FinishTime', type: 'sap.ui.model.type.Time'}"/>-->
+						</publix:secondStatus>
+						<publix:attributes>
+							<ObjectAttribute text="{ShortText}"/>
+							<ObjectAttribute text="{Status}" tooltip="Service Order Status"/>
+							<ObjectAttribute title="Hard Down" text="No"/>
+						</publix:attributes>
+						<publix:statuses>
+							<ObjectStatus title="Repeat Call" text="Yes"/>
+						</publix:statuses>
+					</publix:ServTechListItem>
+					<!--	<publix:ServTechListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange">-->
+					<!--	<publix:firstStatus>-->
+					<!--		<ObjectStatus text="FinishDate" />-->
+					<!--	</publix:firstStatus>-->
+					<!--	<publix:secondStatus>-->
+					<!--		<ObjectStatus text="12:00 AM"/>-->
+					<!--	</publix:secondStatus>-->
+					<!--	<publix:attributes>-->
+					<!--		<ObjectAttribute text="{Number}"/>-->
+					<!--		<ObjectAttribute text="{ShortText}"/>-->
+					<!--		<ObjectAttribute text="Status"/>-->
+					<!--		<ObjectAttribute title="Hard Down" text="No"/>-->
+					<!--	</publix:attributes>-->
+					<!--	<publix:statuses>-->
+					<!--		<ObjectStatus title="Repeat Call" text="Yes"/>-->
+					<!--	</publix:statuses>-->
+					<!--</publix:ServTechListItem>-->
+				</items>
+			</List>
+		</semantic:content>
+		<semantic:sort>
+			<semantic:SortSelect press="onSemanticSelectChange"/>
+		</semantic:sort>
+		<semantic:filter>
+			<semantic:FilterAction press="onSemanticButtonPress"/>
+		</semantic:filter>
+	</semantic:MasterPage>
+</mvc:View>

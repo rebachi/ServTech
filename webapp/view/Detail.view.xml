@@ -1,0 +1,206 @@
+<mvc:View controllerName="com.publix.servtech.controller.Detail" xmlns:core="sap.ui.core" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" navButtonPress="goToMaster" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false" showTitleInHeaderContent="true">
+				<headerTitle>
+					<ObjectPageHeader isObjectIconAlwaysVisible="false" objectSubtitle="{ShortText}" isObjectTitleAlwaysVisible="false"
+						isObjectSubtitleAlwaysVisible="false" objectTitle="{Number}">
+						<!--<m:Toolbar active="true" id="OfflineBar" visible="true" press="onOpenOfflineInfo">-->
+						<!--	<m:Title id="OfflineBarLabel" text="&#9432; Offline Mode "/>-->
+						<!--</m:Toolbar>-->
+						<!--<actions>-->
+						<!--	<ObjectPageHeaderActionButton icon="sap-icon://locate-me" hideText="false" text="Checkin" press="onCkinCkoutBtnPress"-->
+						<!--		visible="{device>/system/phone}"/>-->
+						<!--	<ObjectPageHeaderActionButton icon="sap-icon://bar-code" text="onBarcodePress" type="Scan bar codes" visible="{device>/system/phone}"/>-->
+						<!--	<ObjectPageHeaderActionButton icon="sap-icon://add-photo" press="onAddPhotoBtnPress" tooltip="Take a Photo" visible="{device>/system/phone}"/>-->
+						<!--</actions>-->
+						<!--	<m:statuses>-->
+						<!--	<m:ObjectStatus title="Priority" text="{path:'Priority',formatter: '.formatter.priorityText'}"-->
+						<!--		state="{ path: 'Priority', formatter: '.formatter.priorityStatus' }"/>-->
+						<!--</m:statuses>-->
+					</ObjectPageHeader>
+					<!--<m:ObjectHeader id="objectHeader" title="{Number}" number="{ path:'FinishDate', type: 'sap.ui.model.type.DateTime', style: 'medium' }"-->
+					<!--	intro="{ShortText}" visible="false">-->
+					<!--	<m:statuses>-->
+					<!--		<m:ObjectStatus title="Priority" text="{path:'Priority',formatter: '.formatter.priorityText'}"-->
+					<!--			state="{ path: 'Priority', formatter: '.formatter.priorityStatus' }"/>-->
+					<!--	</m:statuses>-->
+					<!--	<m:attributes>-->
+					<!--		<m:ObjectAttribute title="MnWkCtr" text="{MnWkCtr}" visible=""/>-->
+					<!--	</m:attributes>-->
+					<!--</m:ObjectHeader>-->
+				</headerTitle>
+				<headerContent>
+					<!--<layout:VerticalLayout>-->
+					<!--	<m:Label text="Refrigerant Type :" design="Bold"/>-->
+					<!--	<m:Label text="Order Number :" design="Bold"/>-->
+					<!--	<m:Label text="POC:" design="Bold"/>-->
+					<!--	<m:Label text="EID: " design="Bold"/>-->
+					<!--	<m:Label text="Description" design="Bold"/>-->
+					<!--	<m:Label text="Status: " design="Bold"/>-->
+					<!--</layout:VerticalLayout>-->
+					<!--<layout:VerticalLayout>-->
+					<!--	<m:Label text="R22"/>-->
+					<!--	<m:Label id="orderID" text="{Number}"/>-->
+					<!--	<m:Label text="John Stevens"/>-->
+					<!--	<m:Label id="equipID" text="{Equipment}"/>-->
+					<!--	<m:Label text="{ShortText}"/>-->
+					<!--	<m:Select id="techStatus" selectedKey="2" items="{ path: 'status_data>/statuses', sorter: { path: 'value' } }">-->
+					<!--		<core:Item key="{status_data>key}" text="{status_data>value}"/>-->
+					<!--	</m:Select>-->
+					<!--</layout:VerticalLayout>-->
+					<layout:VerticalLayout>
+						<m:ObjectStatus title="Refrigerant Type" text="R22"/>
+						<m:ObjectStatus title="POC" text="John Stevens"/>
+						<m:HBox>
+							<m:ObjectStatus title="EID" text="{Equipment}" class="sapUiTinyMarginTop myExtraSpacing"/>
+							<m:HBox visible="{detailView>/checkin}">
+								<m:Label text="({detailView>/barCodeVerifiedText})" class="myGreen myExtraSpacing publixLowLabel" design="Bold"
+									visible="{detailView>/barCodeVerifiedStatus}"/>
+								<m:Link press="onBarcodePress" text="Scan" class="myExtraSpacing publixLowLabel"></m:Link>
+								<m:Link press="getEquipmentHistory" text="History" class="publixLowLabel"></m:Link>
+							</m:HBox>
+						</m:HBox>
+						<!--<m:ObjectStatus title="Description" text="{ShortText}"/>-->
+						<m:HBox>
+							<m:Label text="Status: " class="myExtraSpacing publixLowLabel"/>
+							<m:Select id="techStatus" selectedKey="2" items="{ path: 'status_data>/statuses', sorter: { path: 'value' } }" change="updateStatus">
+								<core:Item key="{status_data>key}" text="{status_data>value}"/>
+							</m:Select>
+						</m:HBox>
+					</layout:VerticalLayout>
+					<!--<layout:VerticalLayout>-->
+					<!--	<m:Label text=""/>-->
+					<!--	<m:Label id="orderID" text="{Number}"/>-->
+					<!--	<m:Label text="John Stevens"/>-->
+					<!--	<m:Label id="equipID" text="{Equipment}"/>-->
+					<!--	<m:Label text="{ShortText}"/>-->
+					<!--	<m:Select id="techStatus" selectedKey="2" items="{ path: 'status_data>/statuses', sorter: { path: 'value' } }">-->
+					<!--		<core:Item key="{status_data>key}" text="{status_data>value}"/>-->
+					<!--	</m:Select>-->
+					<!--</layout:VerticalLayout>-->
+					<!--<layout:VerticalLayout>-->
+					<!--	<m:Label text=""/>-->
+					<!--	<m:Label text=""/>-->
+					<!--	<m:Label text=""/>-->
+					<!--	<m:HBox visible="{detailView>/checkin}">-->
+					<!--		<m:Link press="onBarcodePress" text="Scan" class="myExtraSpacing"></m:Link>-->
+					<!--		<m:Link press="getEquipmentHistory" text="History"></m:Link>-->
+					<!--	</m:HBox>-->
+					<!--	<m:Label text=""/>-->
+					<!--	<m:Link press="makeStatusEditable" text="Edit" class="sapUiTinyMarginTop" visible="{detailView>/editable}"></m:Link>-->
+					<!--	<m:HBox>-->
+					<!--		<m:Link press="makeStatusDisabled" text="Save" class="sapUiTinyMarginTop myExtraSpacing" visible="{detailView>/editable}"></m:Link>-->
+					<!--		<m:Link press="makeStatusDisabled" text="Cancel" class="sapUiTinyMarginTop" visible="{detailView>/editable}"></m:Link>-->
+					<!--	</m:HBox>-->
+					<!--</layout:VerticalLayout>-->
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="personalSection">
+						<subSections>
+							<!--<ObjectPageSubSection id="personalSectionSS1" title="Travel">-->
+							<ObjectPageSubSection id="personalSectionSS1">
+								<m:VBox>
+								<m:MessageStrip text="Offline Mode " visible="{appView>/offLineMode}" type="Error" showIcon="true" 
+									class="sapUiMediumMarginBottom"/>
+								<!--<m:Label text="Publix pays for your Travel? click Travel Start"/>-->
+								<m:HBox>
+									<m:ToggleButton id="ckinckout_bt" text="{i18n>Checkin}" press="onCkinCkoutBtnPress" class="myStroreButton sapUiTinyMarginEnd"/>
+									<m:ToggleButton id="travelStart" visible="{= !${detailView>/checkin}}" text="{i18n>TravelSart}" press="onTravelStart"
+										class="myStroreButton sapUiTinyMarginEnd"/>
+								</m:HBox>
+								</m:VBox>
+							</ObjectPageSubSection>
+							<!--<ObjectPageSubSection id="personalSectionSS4" title="Update">-->
+							<ObjectPageSubSection id="personalSectionSS4" visible="{detailView>/checkin}">
+								<m:HBox>
+									<m:Button icon="sap-icon://add-photo" tooltip="Take a Photo" press="onAddPhotoBtnPress" class="myStroreButton sapUiTinyMarginEnd"/>
+									<m:Button text="Add Notes" press="handleAddNotesPress" class="myStroreButton sapUiTinyMarginEnd"/>
+									<m:Button text="Add Parts" press="handleAddPartsPress" class="myStroreButton"/>
+								</m:HBox>
+							</ObjectPageSubSection>
+							<ObjectPageSubSection id="personalSectionSS5">
+								<m:Table id="EquipementHistory" width="100%" visible="false">
+									<m:headerToolbar>
+										<m:Toolbar>
+											<m:content>
+												<m:Title text="Equipement History" level="H2"/>
+											</m:content>
+										</m:Toolbar>
+									</m:headerToolbar>
+									<m:columns>
+										<m:Column width="12em">
+											<m:Text text="MaterialDoc"/>
+										</m:Column>
+										<m:Column demandPopin="true">
+											<m:Text text="MaterialNumber"/>
+										</m:Column>
+										<m:Column demandPopin="true" hAlign="End">
+											<m:Text text="MovementType"/>
+										</m:Column>
+										<m:Column demandPopin="true" hAlign="Center">
+											<m:Text text="NotificationNumber"/>
+										</m:Column>
+										<m:Column demandPopin="true" hAlign="Center">
+											<m:Text text="Plant"/>
+										</m:Column>
+										<m:Column demandPopin="true" hAlign="Center">
+											<m:Text text="PostingDate"/>
+										</m:Column>
+										<m:Column demandPopin="true" hAlign="Center">
+											<m:Text text="SerialNumber"/>
+										</m:Column>
+									</m:columns>
+								</m:Table>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+				<footer>
+					<m:OverflowToolbar>
+						<m:ToolbarSpacer/>
+						<m:Button type="Accept" text="Accept"/>
+						<m:Button type="Reject" text="Reject"/>
+					</m:OverflowToolbar>
+				</footer>
+			</ObjectPageLayout>
+		</semantic:content>
+		<!--
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+		-->
+		<semantic:messagesIndicator>
+			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
+		</semantic:messagesIndicator>
+		<!--<m:Button-->
+		<!--                 icon="sap-icon://alert"-->
+		<!--                 text="{= ${message>/}.length }"-->
+		<!--                 visible="{= ${message>/}.length > 0 }"-->
+		<!--                 type="Emphasized"-->
+		<!--                 press="onMessagePopoverPress"/>-->
+		<semantic:mainAction>
+			<semantic:MainAction text="Save" press="onSemanticSavePress"/>
+		</semantic:mainAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction press="onSemanticSavePress"/>
+		</semantic:cancelAction>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Copy Equipment Number" tooltip="Click to Copy Equipment Number to ClipBoard" visible="{device>/system/phone}"
+				press="onSemanticcpyEID"/>
+		</semantic:positiveAction>
+		<semantic:negativeAction>
+			<semantic:NegativeAction text="&#9432; Offline Mode " visible="{appView>/offLineMode}" press="onOpenOfflineInfo" />
+			<!--<semantic:NegativeAction text="&#9432; Offline Mode "  visible="true"-->
+			<!--press="onOpenOfflineInfo"/>-->
+		</semantic:negativeAction>
+	</semantic:DetailPage>
+</mvc:View>

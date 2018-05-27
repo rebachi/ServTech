@@ -1,0 +1,36 @@
+.myStroreBar{
+	height:3rem !important;
+}
+
+.myStroreButton{
+	height:100px !important;
+	width:100px !important;
+}
+
+.myStroreButton span.sapMBtnInner {
+    height:100%;
+ }
+
+.myStroreButton span.sapMBtnContent {
+	line-height: 5.5rem;
+ }
+
+.myStroreButton span.sapMBtnIcon {
+	line-height: 5.5rem;
+ }
+ 
+ .myExtraSpacing {
+   padding: 0 6px 0 0px !important;
+}
+
+.myGreen{
+	color: green !important;;
+}
+
+.myRed{
+	color: red !important;;
+}
+
+.publixLowLabel {
+	line-height: 2rem;
+ }

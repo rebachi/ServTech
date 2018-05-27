@@ -1,0 +1,47 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	controllerName="com.publix.servtech.controller.Notes" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Add/View Notes of Service Order {notesView>/Number}" navButtonPress="onNavBack" showNavButton="true">
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="pCancel" text="Cancel" type="Reject" press="onNavBack"/>
+						<Button id="paction" text="Save" type="Accept" press="handleNotesSave"/>
+					</Toolbar>
+				</footer>
+				<content>
+					<VBox>
+						<VBox class="sapUiSmallMargin">
+							<f:Form id="FormChange471" editable="true">
+								<f:title>
+									<core:Title text="Add a Note" level="H2"/>
+								</f:title>
+								<f:layout>
+									<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1"
+										emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+								</f:layout>
+								<f:formContainers>
+									<f:FormContainer>
+										<f:formElements>
+											<f:FormElement label="Add a Note">
+												<f:fields>
+													<TextArea id="note" value="" growing="true" growingMaxLines="5" rows="2"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="Existing Notes" design="Bold">
+												<f:fields>
+													<TextArea id="AllNotes" value="{notesView>/existingNotes}" growing="true" growingMaxLines="5" rows="9" enabled="false"/>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+								</f:formContainers>
+							</f:Form>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

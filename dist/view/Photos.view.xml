@@ -1,0 +1,31 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="com.publix.servtech.controller.Photos">
+	<App>
+		<pages>
+			<Page title="Add/View Photos of Service Order {photosView>/Number}" navButtonPress="onNavBack" showNavButton="true">
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="pCancel" text="Cancel" type="Reject" press="onNavBack"/>
+						<Button id="paction" text="Save" type="Accept" press="onPhotoSave"/>
+					</Toolbar>
+				</footer>
+				<content>
+					<VBox>
+						<VBox class="sapUiSmallMargin">
+							<HBox  justifyContent="SpaceAround">
+								<Image id="myImage" tooltip="uploaded image" width="{photosView>/imageWidth}"/>
+							</HBox>
+							<HBox  justifyContent="SpaceAround" class="sapUiLargeMarginTop">
+								<Label id="PhotoCaptionlbl" text="Add a caption"/>
+							</HBox>
+							<HBox  justifyContent="SpaceAround">
+								<TextArea id="PhotoCaption" value="" cols="60" rows="10" growing="true" width="{photosView>/taWidth}"/>
+							</HBox>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

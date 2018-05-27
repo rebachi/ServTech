@@ -1,0 +1,260 @@
+{
+    "_version": "1.4.0",
+    "sap.app": {
+        "id": "com.publix.servtech",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.4.0"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZFIORI_NAVI_ASSOC_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "equipService": {
+                "uri": "/sap/opu/odata/sap/ZFIORI_EQUIPMENT_DISPLAY_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "status_data_alias": {
+                "uri": "model/status_data.json",
+                "type": "JSON"
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.2masterdetail",
+            "version": "1.38.3"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://detail-view",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_bluecrystal"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "com.publix.servtech.view.App",
+            "type": "XML",
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.38.0",
+            "libs": {
+                "sap.ui.core": {
+                    "minVersion": "1.38.0"
+                },
+                "sap.m": {
+                    "minVersion": "1.38.0"
+                },
+                "sap.ushell": {
+                    "minVersion": "1.38.0"
+                },
+                "sap.collaboration": {
+                    "minVersion": "1.38",
+                    "lazy": true
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.publix.servtech.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "settings": {
+                    "useBatch": false
+                },
+                "preload": true
+            },
+            "equipment": {
+                "dataSource": "equipService",
+                "settings": {
+                    "useBatch": false
+                },
+                "preload": false
+            },
+            "status_data": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "status_data_alias",
+                "preload": true
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.publix.servtech.view",
+                "controlId": "idAppControl",
+                "controlAggregation": "detailPages",
+                "bypassed": {
+                    "target": []
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "home",
+                    "target": [
+                        "selectStoreDetail",
+                        "selectStore"
+                    ]
+                },
+                {
+                    "pattern": "store/{storeId}",
+                    "name": "master",
+                    "target": [
+                        "master"
+                    ]
+                },
+                {
+                    "pattern": "store/{storeId}/SO_header1Set/{objectId}",
+                    "name": "object",
+                    "target": [
+                        "object"
+                    ]
+                },
+                {
+                    "pattern": "store/{storeId}/SO_header1Set/{objectId}/Parts",
+                    "name": "parts",
+                    "target": [
+                        "master",
+                        "parts"
+                    ]
+                },
+                {
+                    "pattern": "store/{storeId}/SO_header1Set/{objectId}/Notes",
+                    "name": "notes",
+                    "target": [
+                        "master",
+                        "notes"
+                    ]
+                },
+                {
+                    "pattern": "store/{storeId}/SO_header1Set/{objectId}/Photos",
+                    "name": "photos",
+                    "target": [
+                        "master",
+                        "photos"
+                    ]
+                },
+                {
+                    "pattern": "store/{storeId}/SO_header1Set/{objectId}/RepairHstory/{equipID}",
+                    "name": "repairHistory",
+                    "target": [
+                        "repairHistory"
+                    ]
+                },
+                {
+                    "name": "selectStore",
+                    "pattern": "selectStore",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "master",
+                        "object"
+                    ]
+                }
+            ],
+            "targets": {
+                "selectStore": {
+                    "viewName": "SelectStore",
+                    "viewLevel": 1,
+                    "viewId": "selectStore",
+                    "controlAggregation": "masterPages"
+                },
+                "master": {
+                    "viewName": "Master",
+                    "viewLevel": 1,
+                    "viewId": "master",
+                    "controlAggregation": "masterPages"
+                },
+                "parts": {
+                    "viewName": "Parts",
+                    "viewId": "parts",
+                    "viewLevel": 3
+                },
+                "notes": {
+                    "viewName": "Notes",
+                    "viewId": "notes",
+                    "viewLevel": 3
+                },
+                "photos": {
+                    "viewName": "Photos",
+                    "viewId": "photos",
+                    "viewLevel": 3
+                },
+                "repairHistory": {
+                    "viewName": "RepairHistory",
+                    "viewId": "repairHistory",
+                    "viewLevel": 3
+                },
+                "object": {
+                    "viewName": "Detail",
+                    "viewId": "detail",
+                    "viewLevel": 2
+                },
+                "selectStoreDetail": {
+                    "viewName": "SelectStoreDetail",
+                    "viewId": "selectStoreDetail",
+                    "viewLevel": 2
+                },
+                "detailObjectNotFound": {
+                    "viewName": "DetailObjectNotFound",
+                    "viewId": "detailObjectNotFound"
+                },
+                "detailNoObjectsAvailable": {
+                    "viewName": "DetailNoObjectsAvailable",
+                    "viewId": "detailNoObjectsAvailable"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zsrvtech",
+        "_version": "1.1.0"
+    }
+}
